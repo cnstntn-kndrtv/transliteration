@@ -1,0 +1,19 @@
+{
+  "name": "transliteration",
+  "version": "0.0.1",
+  "description": "transliterate russian text to english and bacwards",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cnstntn-kndrtv/transliteration.git"
+  },
+  "dependencies": {
+    "langdetect": "git://github.com/cnstntn-kndrtv/langdetect.git"
+    
+  },
+  "author": "Constantin Kondratyev",
+  "license": "ISC"
+}
