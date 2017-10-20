@@ -1,12 +1,6 @@
 const signMap = require('./signMap');
 let langdetect = require('langdetect');
 
-// транслитерация
-// transliteration('привет','russian') // privet
-// ошибки переключения клавиатуры
-// transliteration('руддщ','keyboard') // hello
-// transliteration('ghbdtn','keyboard') // привет
-
 function transliteration(str, mode) {
   let result = false;
   if (mode == 'russian') {
@@ -19,34 +13,28 @@ function transliteration(str, mode) {
 }
 
 function transRussian(str) {
-  let result = '';
-  for (let i = 0; i < str.length; i++) {
-    if (signMap.russian.hasOwnProperty(str[i])) {
-      result += signMap.russian[str[i]];
-    }
-  }
-  return result;
+  return changeSigns(str, signMap.translit.cyrilic);
 }
 
 function transKeyboard(str) {
   let lang = langdetect.detect(str);
-  let result = '';
   if (lang == 'russian') {
-    for (let i = 0; i < str.length; i++) {
-      for (let latin in signMap.keyboard) {
-        if (signMap.keyboard[latin] == str[i]) result += latin;
-      }
-    }
-
+    return changeSigns(str, signMap.keyboard.cyrilic)
   }
   else if (lang == 'english') {
-    for (let i = 0; i < str.length; i++) {
-      if (signMap.keyboard.hasOwnProperty(str[i])) {
-        result += signMap.keyboard[str[i]];
-      }
-    }
+    return changeSigns(str, signMap.keyboard.latin)
   }
-  return result;
+  else return str;
+}
+
+function changeSigns(str, obj) {
+  str = str.split('');
+  str = str.map((s) => {
+    if (obj.hasOwnProperty(s)) {
+      return obj[s];
+    } else return s;
+  })
+  return str.join('');
 }
 
 module.exports = transliteration;
