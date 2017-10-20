@@ -6,3 +6,5 @@ console.log(translit('hello!','russian')) // hello
 // ошибки переключения клавиатуры
 console.log(translit('рУдДЩ?','keyboard')) // hello
 console.log(translit('gHbdTN \(*_*)/','keyboard')) // привет
+
+console.log(translit(123,'keyboard')) // привет

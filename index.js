@@ -2,12 +2,14 @@ const signMap = require('./signMap');
 let langdetect = require('langdetect');
 
 function transliteration(str, mode) {
-  let result = false;
-  if (mode == 'russian') {
-    result = transRussian(str);
-  }
-  else if (mode == 'keyboard') {
-    result = transKeyboard(str);
+  let result = str;
+  if (typeof(str) == 'string') {
+    if (mode == 'russian') {
+      result = transRussian(str);
+    }
+    else if (mode == 'keyboard') {
+      result = transKeyboard(str);
+    }
   }
   return result;
 }
